@@ -311,16 +311,24 @@ backgroundSize: 30em
 
 ## An alternate view of the same data
 
+<div class="p-2">
+
+
 Rather than storing data according to a particular view, data is stored in a “view neutral” format.  Data can be combined into many different views depending on the needs of the user.
 
 
 ![](/images/monthly.png){class="w-90"}
 
 
+</div>
+
 
 ---
 
 ## Non-relational Model
+
+<div class="p-2">
+
 
 MongoDB uses JSON as a Data Model
 
@@ -342,8 +350,9 @@ MongoDB uses JSON as a Data Model
      }
    ]
  }
-
 ```
+
+</div>
 
 ---
 layout: image
@@ -351,8 +360,13 @@ image: /images/more_json.png
 backgroundSize: 30em
 ---
 
+---
 
 ## HW: In-memory tables to optimized data retrieval
+
+<div class="p-2">
+
+<v-clicks>
 
 - Five part homework series which uses Python to build foundation understanding of database systems.
 - HW1–HW2 → Data dictionary + tuples (DDL/Schema & rows)
@@ -360,9 +374,9 @@ backgroundSize: 30em
 - HW4 → Storage manager (file & buffer notions) + disk layout
 - HW5 → Indices (ordered access path) + faster lookups
 
+</v-clicks>
 
-
-
+</div>
 
 ---
 
@@ -375,6 +389,10 @@ backgroundSize: 30em
 
 ## About PostgreSQL
 
+<div class="p-2">
+
+<v-clicks>
+
 - Open source and no corporate overlord
 - ACID compliance – data integrity with robust transactional support
 - Closely follows SQL standard
@@ -383,16 +401,29 @@ backgroundSize: 30em
 - Extensibility with Python
   - Supports server-side programming through PL/Python extension,
 
+</v-clicks>
+
+</div>
+
+
 
 ---
 
 
 ## PostgreSQL Demo
 
+<div class="p-2">
+
+<v-clicks>
+
 - Run PostgreSQL in a Docker container
   - Instal Docker (if you don’t already have it)
-    - Easiest way is with Docker Desktop (scroll down on page) – can skip “Sign In”
+    - Easiest way is with Docker Desktop (scroll down on page) – can skip "Sign In"
   - From terminal emulator (Terminal app on Mac/Linux, PowerShell on Windows):
+
+</v-clicks>
+
+<v-click>
 
 ```bash
 docker run --name cst363-postgres 
@@ -400,6 +431,10 @@ docker run --name cst363-postgres
 -p 5431:5432 
 -d postgres
 ```
+
+</v-click>
+
+</div>
 
 ---
 
@@ -425,6 +460,9 @@ docker run --name cst363-postgres
 
 ## pgAdmin GUI
 
+<div class="p-2">
+
+<v-clicks>
 
 - https://www.pgadmin.org/download/
 - Graphical Interface: User-friendly GUI for database management and querying.
@@ -435,3 +473,6 @@ docker run --name cst363-postgres
 - Additional Setup: Requires separate installation and configuration.
 
 
+</v-clicks>
+
+</div>
