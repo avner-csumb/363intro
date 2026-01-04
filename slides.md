@@ -25,7 +25,12 @@ CST 363
 
 - An intensive, hands-on introduction to database systems blending theory, design, and implementation.
 
-- Topics include the relational model, conceptual modeling (ER), SQL from basics to advanced analytics, and the internals of storage, indexing, and transactions
+- Topics include the 
+  - relational model, 
+  - conceptual modeling (Entity Relationship Diagrams)
+  - SQL from basics to advanced analytics
+  - indexing
+  - transactions
 
 - Also covered: distributed and non-relational systems (MongoDB, Redis), geospatial data (PostGIS/MongoDB), and abstraction layers (ORM)
 
@@ -50,6 +55,8 @@ CST 363
 
 - This course teaches you the concepts of a database system and applies the algorithms you learned in data structures in programming assignments related to database systems.
 
+- By the end, you will be able to design a schema, write non-trivial SQL, and reason about basic DBMS internals.
+
 </v-clicks>
 
 </div>
@@ -72,6 +79,9 @@ CST 363
   - hierarchy had to be traversed in order
   - lack of declarative queries
 
+
+- Navigational access (hierarchical/network) evolved to declarative queries (relational/SQL) 
+
 </v-clicks>
 
 </div>
@@ -89,6 +99,7 @@ CST 363
 - Try to do the reading early in the week
   - O'Reilly Books (<a href="https://docs.google.com/document/d/1saT8iMSDjfODRiKfCHfbSfZgvfUoMS7w_VQm6FDnHmY/edit?usp=sharing" target="_blank">link</a>)
 
+- Skim first, then re-visit after lecture.
   
 </div>
 
@@ -131,13 +142,12 @@ CST 363
 
 <v-clicks depth="2">
 
-- Update file records in place without rewriting the entire file
-  - record size may change
+- DBMS manages variable-length records, free space, concurrency, recovery)
 - Recovery from failure and partial update
+- Transactions: atomicity, durability
 - Concurrent access by multiple programs
+  - For example, two students register for the last seat at the same time → concurrency control.
 - Security – provide access to some, but not all, the data
-
-
 
 </v-clicks>
 
@@ -145,9 +155,7 @@ CST 363
 
 ---
 
-
-# Terminology
-
+## Terminology
 
 <div class="p-2">
 
@@ -169,10 +177,9 @@ CST 363
 
 ## Terminology (cont.)
 
-<div class="p-2">
+<div class="p-3">
 
 <v-clicks depth="3">
-
 
 - Relation – a table in a relational database
   - Table, relational table, relation all mean the same thing.
@@ -180,6 +187,7 @@ CST 363
   - Column, field, attribute all mean the same thing.
     - Values of a column have the same datatype.
   - IMPORTANT: Within each row, columns are single valued.
+    - First Normal Form (1NF)
 
 </v-clicks>
 
@@ -189,6 +197,9 @@ CST 363
 
 ## Terminology
 
+<div class="p-3">
+
+
 
 Example of relational and  non-relational tables
 
@@ -196,26 +207,24 @@ Example of relational and  non-relational tables
 ![](/images/img1.png){class="w-90"}
 
 
----
-
-## Relational Model
-
-
-<div class="p-2">
-
-- All the data is stored in various tables.
-  - Other data models use trees, graphs or map structures.
-
 </div>
+
 
 ---
 
 ## Relational Model (cont.)
 
-Example of tabular data in the relational model
+<div class="p-3">
+
+- All the data is stored in various tables.
+  - Other data models use trees, graphs or map structures.
 
 
-![](/images/img2.png){class="w-90"}
+Example of tabular data in the relational model:
+![](/images/img2.png){class="w-80"}
+
+
+</div>
 
 
 ---
@@ -226,15 +235,31 @@ Example of tabular data in the relational model
 
 <v-clicks depth="2">
 
-- **primary key** – a minimal set of columns that uniquely identify a row
+- **primary key (PK)** – a minimal set of columns that uniquely identify a row
+  - cannot be `NULL`
+  - enforced by database
   - Example:  `department.dept_name`
-- **foreign key** – a column (or set of columns) that refers to a row in another table using the primary
+- **foreign key (FK)** – a column (or set of columns) that refers to a row in another table using the primary
   - key of the target row
+  - enforces referential integrity (prevents orphan rows)
   - Example: `course.dept_name` → references `department.dept_name`
+- Natural vs surrogate keys
+  - **natural key** - primary key from *real-world/business data*
+  - **surrogate key** - artificial identifier with no business meaning 
 
 </v-clicks>
 
 </div>
+
+
+---
+
+## Keys as Constraints
+
+
+![](/images/key_constraints.png){class="w-140"}
+
+
 
 ---
 
@@ -253,7 +278,7 @@ Example of tabular data in the relational model
 
 - **Candidate keys** - an alternate minimal set of columns that identify a row
   - Example:  `student_email`
-  - From the set of Candidate Keys, one is chosen as the Primary Key
+  - From the set of candidate keys, one is chosen as the primary key
 
 </v-clicks>
 
@@ -269,33 +294,44 @@ Example of tabular data in the relational model
 
 ---
 
+## Foreign keys connect tables
+
+<div class="p-2">
 
 - A column such as `customerid` in the SalesTransaction table is  the "primary key" value of another row and serves as a link to that row. 
 - The `customerid` column in SalesTransaction is a "foreign key".
 
+</div>
 
-<div class="grid grid-cols-2 gap-4">
+<div class="grid grid-cols-3 gap-2">
   <div>
 
-`customer`
+<small>customer</small>
 ![](/images/customer.png){class="w-50"}
 
-
-`sales_transaction`
+<small>sales_transaction</small>
 ![](/images/sales_transaction.png){class="w-50"}
 
-`product`
-![](/images/product.png){class="w-50"}
+
   
   </div>
   <div>
 
+<small>product</small>
+![](/images/product.png){class="w-50"}
 
-`includes`
-![](/images/includes.png){class="w-50"}
 
 
 </div>
+
+<div>
+
+<small>includes</small>
+![](/images/includes.png){class="w-45"}
+
+
+</div>
+
 </div>
 
 
@@ -327,12 +363,21 @@ Rather than storing data according to a particular view, data is stored in a “
 
 ## Non-relational Model
 
-<div class="p-2">
+
+<div class="grid grid-cols-2 gap-4">
+
+<div class="p-4">
+
+- MongoDB uses JSON as a Data Model
+  - Document Model
+  - Embedding can reduce joins for read-heavy access patterns, but can introduce duplication and update complexity.
+
+</div>
 
 
-MongoDB uses JSON as a Data Model
+<div>
 
-```json
+```json {*}{class:'!children:text-[10px] !children:leading-[14px]'}
 {
    "tid": "T444",
    "customer": {
@@ -354,6 +399,11 @@ MongoDB uses JSON as a Data Model
 
 </div>
 
+</div>
+
+
+
+
 ---
 layout: image
 image: /images/more_json.png
@@ -362,9 +412,20 @@ backgroundSize: 30em
 
 ---
 
+
+## Database Architecture
+
+
+- Query processor → optimizer → execution engine → storage manager → buffer → disk
+
+![](/images/storage.png){class="w-90"}
+
+
+---
+
 ## HW: In-memory tables to optimized data retrieval
 
-<div class="p-2">
+<div class="p-3">
 
 <v-clicks>
 
@@ -378,12 +439,6 @@ backgroundSize: 30em
 
 </div>
 
----
-
-## Database Architecture
-
-
-![](/images/storage.png){class="w-90"}
 
 ---
 
@@ -394,12 +449,13 @@ backgroundSize: 30em
 <v-clicks>
 
 - Open source and no corporate overlord
-- ACID compliance – data integrity with robust transactional support
+- ACID transactions (atomicity, consistency, isolation, durability)
+  - data integrity with robust transactional support
 - Closely follows SQL standard
 - Supports JSON and JSONB for semi-structured data 
 - Battle-tested with strong community support
 - Extensibility with Python
-  - Supports server-side programming through PL/Python extension,
+  - Supports server-side programming through PL/Python extension
 
 </v-clicks>
 
