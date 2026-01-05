@@ -23,7 +23,7 @@ CST 363
 
 <v-clicks>
 
-- An intensive, hands-on introduction to database systems blending theory, design, and implementation.
+- An intensive, hands-on introduction to database systems blending theory, design,<br>and implementation.
 
 - Topics include the 
   - relational model, 
@@ -72,7 +72,7 @@ CST 363
 
 <v-clicks>
 
-- A story of how humans wanted to **represent** and **query** information more *naturally*, *flexibly*, and *efficiently* over time 
+- A story of how humans wanted to **represent** and **query** information more *naturally*, *flexibly*,<br>and *efficiently* over time 
 
 - Early databases were very rigid and/or difficult to navigate
   - one record ("child") could only have one parent → duplicate records
@@ -113,7 +113,7 @@ CST 363
 <v-clicks depth="2">
 
 
-- Physical Data Independence – can change how data is physically stored without affecting the applications that use the database
+- Physical Data Independence – can change how data is physically stored without<br>affecting the applications that use the database
 - Logical Data Independence
   - Add new data elements without breaking existing applications.
   - File based systems (pre-DBMS) tightly coupled to file formats
@@ -239,8 +239,7 @@ Example of tabular data in the relational model:
   - cannot be `NULL`
   - enforced by database
   - Example:  `department.dept_name`
-- **foreign key (FK)** – a column (or set of columns) that refers to a row in another table using the primary
-  - key of the target row
+- **foreign key (FK)** – a column (or set of columns) that refers to a row in another table using the primary key of the target row
   - enforces referential integrity (prevents orphan rows)
   - Example: `course.dept_name` → references `department.dept_name`
 - Natural vs surrogate keys
@@ -298,18 +297,18 @@ Example of tabular data in the relational model:
 
 <div class="p-2">
 
-- A column such as `customerid` in the SalesTransaction table is  the "primary key" value of another row and serves as a link to that row. 
-- The `customerid` column in SalesTransaction is a "foreign key".
+- A column such as `customerid` in the `SalesTransaction` table is  the "primary key"<br>value of another row and serves as a link to that row. 
+- The `customerid` column in `SalesTransaction` is a "foreign key".
 
 </div>
 
 <div class="grid grid-cols-3 gap-2">
   <div>
 
-<small>customer</small>
+<small>Customer</small>
 ![](/images/customer.png){class="w-50"}
 
-<small>sales_transaction</small>
+<small>SalesTransaction</small>
 ![](/images/sales_transaction.png){class="w-50"}
 
 
@@ -317,7 +316,7 @@ Example of tabular data in the relational model:
   </div>
   <div>
 
-<small>product</small>
+<small>Product</small>
 ![](/images/product.png){class="w-50"}
 
 
@@ -326,7 +325,7 @@ Example of tabular data in the relational model:
 
 <div>
 
-<small>includes</small>
+<small>Includes</small>
 ![](/images/includes.png){class="w-45"}
 
 
@@ -500,7 +499,7 @@ docker run --name cst363-postgres
 
 <v-clicks depth="2">
 
-- Text-Based Interface: Operates entirely from the command line, suitable for scripting and automation.
+- Text-Based Interface: Operates entirely from the command line, suitable for scripting<br>and automation.
 - Lightweight: No GUI overhead, making it fast and resource-efficient.
 - Advanced Querying: Allows users to write and execute SQL queries directly.
 - Script-Friendly: Ideal for running SQL scripts and batch operations.
